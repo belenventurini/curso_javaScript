@@ -3,11 +3,14 @@
     margin: 0;
     padding: 0;
 }
-
+main{
+    background-color: rgb(141, 218, 221);
+    display: flex;
+    flex-direction: column
+}
 .cajaUno{
     width: 100%;
-    height: 600px;
-    background-color: rgb(194, 212, 235);
+    height: 200px;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -17,6 +20,18 @@
 .titulo{
     font-family: 'Montserrat', sans-serif;
     font-size: 30px;
-    color: rgba(216, 142, 4, 0.863);
+    color: rgba(228, 152, 12, 0.918);
     font-weight: bold;
+}
+.cajaDos{
+    width: 100%;
+    height: 500px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center
+}
+img{
+    width: 35%;
+    height: 500px;
 }
