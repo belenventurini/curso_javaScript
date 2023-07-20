@@ -27,16 +27,31 @@ agregarTesALista(te3);
 // let te = prompt("Elija un numero de Té: (frutos del bosque = 1 ,matcha = 2 ,negro = 3)")
 
 let cajaTeElegido = document.getElementById("cajaTeElegido");
-const boton2 = document.getElementById('boton2');
+
 const boton3 = document.getElementById('boton3');
 
-
-boton2.addEventListener('click', () => {
-    traerTePorID(2); 
-});
 boton3.addEventListener('click', () => {
     traerTePorID(3); 
 });
+
+const objeto1JSON = JSON.stringify(te1);
+const objeto2JSON = JSON.stringify(te2);
+const objeto3JSON = JSON.stringify(te3);
+localStorage.setItem('objetoGuardado1', objeto1JSON);
+localStorage.setItem('objetoGuardado2', objeto2JSON);
+localStorage.setItem('objetoGuardado3', objeto3JSON);
+
+const objetoJSONRecuperado1 = localStorage.getItem('objetoGuardado1');
+const objetoRecuperado1 = JSON.parse(objetoJSONRecuperado1);
+
+const objetoJSONRecuperado2 = localStorage.getItem('objetoGuardado2');
+const objetoRecuperado2 = JSON.parse(objetoJSONRecuperado2);
+
+const objetoJSONRecuperado3 = localStorage.getItem('objetoGuardado3');
+const objetoRecuperado3 = JSON.parse(objetoJSONRecuperado3);
+console.log(objetoJSONRecuperado1)
+console.log(objetoRecuperado2)
+console.log(objetoRecuperado3)
 
 //funcion con metodo push para insertar mis tres objetos dentro del array
 function agregarTesALista(te) {
@@ -52,7 +67,7 @@ function traerTePorID(numero) {
         if (cajaDeTe.id == numero) {
             const mensaje = `Nombre: ${cajaDeTe.nombre}\nDescripción: ${cajaDeTe.funcion}\nPrecio: ${cajaDeTe.precio}`;
             cajaTeElegido.textContent = mensaje;
-            console.log(mensaje)
+            // console.log(mensaje)
         }
     });
 }
