@@ -1,21 +1,90 @@
+
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap');
+
 *{
     margin: 0;
     padding: 0;
 }
-main{
-    background-color: rgb(141, 218, 221);
-    display: flex;
-    flex-direction: column
+img{
+    height: 220px;
+    width: 220px;
 }
-.cajaUno{
-    width: 100%;
-    height: 200px;
+#titulo{
+    
+    text-align: center;
+    color: black;
+    font-size: 23px;
+    font-family: 'Montserrat', sans-serif;
+}
+p{
+    font-family: 'Montserrat', sans-serif;
+    font-size: 20px;
+    color: rgb(133, 133, 187);
+}
+.encabezado{
+    margin-top: 15px;
+    height: 100px;
+    width: auto;
     display: flex;
-    flex-direction: column;
     align-items: center;
-    justify-content: center
+    justify-content: center;
 }
+.contenedor{
+    margin-top: 50px;
+    width: 100%;
+    height: 700px;
+    justify-content: space-evenly;
+    display: grid;
+    grid-template-columns: 300px 300px 300px  ;
+    grid-template-rows: 60% 40%;
+    gap: 8px;
+}
+#cajaUno{
+    background-color: rgb(218, 238, 228);
+    border-radius: 15px;
+    grid-column: 1/1;
+    height: 400px;
+    width: 300px;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    flex-direction: column ;
+    box-shadow: rgba(83, 83, 83, 0.2) 0px 2px 8px 0px;
+}
+#cajaDos{
+    border-radius: 15px;
+    background-color: rgb(218, 238, 228);
+    grid-column: 2/2;
+    height: 400px;
+    width: 300px;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    flex-direction: column ;
+    box-shadow: rgba(83, 83, 83, 0.2) 0px 2px 8px 0px;
+}
+#cajaTres{
+    border-radius: 15px;
+    background-color: rgb(218, 238, 228);
+    grid-column: 3/3;
+    height: 400px;
+    width: 300px;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    flex-direction: column ;
+    box-shadow: rgba(83, 83, 83, 0.2) 0px 2px 8px 0px;
+}
+
+.contenedorDos{
+    grid-row: 2;
+    grid-column: 1 / span 3;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: aqua;
+}
+
 
 .titulo{
     font-family: 'Montserrat', sans-serif;
@@ -23,15 +92,42 @@ main{
     color: rgba(228, 152, 12, 0.918);
     font-weight: bold;
 }
-.cajaDos{
+
+
+#css-button-shadow-border-sliding--green {
+    min-width: 130px;
+    height: 40px;
+    color: #fff;
+    padding: 5px 10px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+    display: inline-block;
+    outline: none;
+    border-radius: 5px;
+    border: none;
+    box-shadow:inset 2px 2px 2px 0px rgba(255,255,255,.5), 7px 7px 20px 0px rgba(0,0,0,.1), 4px 4px 5px 0px rgba(0,0,0,.1);
+    background: #56a78c;
+   z-index: 1;
+  }
+  #css-button-shadow-border-sliding--green:hover:after {
     width: 100%;
-    height: 500px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center
-}
-img{
-    width: 35%;
-    height: 500px;
-}
+    left: 0;
+  }
+  #css-button-shadow-border-sliding--green:after {
+    border-radius: 5px;
+    position: absolute;
+    content: "";
+    width: 0;
+    height: 100%;
+    top: 0;
+    z-index: -1;
+    box-shadow:inset 2px 2px 2px 0px rgba(255,255,255,.5), 7px 7px 20px 0px rgba(0,0,0,.1), 4px 4px 5px 0px rgba(0,0,0,.1);
+    transition: all 0.3s ease;
+    background-color: #89e6ce;
+    right: 0;
+  }
+  #css-button-shadow-border-sliding--green:active {
+    top: 2px;
+  }

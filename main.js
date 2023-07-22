@@ -1,19 +1,21 @@
 
 //creo una clase con un constructor dandole los parametros
 class Te {
-    constructor(nombre, funcion, sabor, precio, color, id) {
+    constructor(nombre, funcion, sabor, precio, color, id, img) {
         this.nombre = nombre
         this.funcion = funcion
         this.sabor = sabor
         this.precio = precio
         this.color = color
         this.id = id
+        this.img = img
     }
 }
 //creo los objetos con sus respectivas caracteristicas
-const te1 = new Te('frutos del bosque', 'antioxidante', 'dulce', 550, 'colorado', 1);
+const te1 = new Te('frutos del bosque', 'relajante', 'dulce', 550, 'colorado', 1 );
 const te2 = new Te('matcha', 'dijestivo', 'amargo', 1000, 'verde manzana', 2);
 const te3 = new Te('negro', 'energetico', 'amargo', 550, 'oscuro', 3);
+
 
 //hago un array vacio, en donde después a taves del metodo push, inserto mis objetos ahi adentro
 const listaDeTes = []
@@ -58,16 +60,15 @@ function agregarTesALista(te) {
     listaDeTes.push(te)
 }
 
-//funcion que me trae un objeto tomando como unico referente, el id.
-//utilizo el metodo forEach que recorre mi array, y en la condición compara mi objeto por el id, con la validacion
-// del dato ingresado, mediante prompt  
+
 function traerTePorID(numero) {
 
     listaDeTes.forEach(cajaDeTe => {
         if (cajaDeTe.id == numero) {
-            const mensaje = `Nombre: ${cajaDeTe.nombre}\nDescripción: ${cajaDeTe.funcion}\nPrecio: ${cajaDeTe.precio}`;
-            cajaTeElegido.textContent = mensaje;
-            // console.log(mensaje)
+            const mensaje =  `Nombre: ${cajaDeTe.nombre}<br>Funcion: ${cajaDeTe.funcion}
+            <br>Sabor: ${cajaDeTe.sabor}<br>Color: ${cajaDeTe.color}<br>Precio: ${cajaDeTe.precio}`;
+            cajaTeElegido.innerHTML = mensaje;
+
         }
     });
 }

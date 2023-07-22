@@ -10,18 +10,39 @@
 </head>
 <body>
     <main>
-        <div class="cajaUno">
-            <p class="titulo">segunda entrega </p>
-            <h1 id="cajaTeElegido"> </h1>
-            <button  onClick="traerTePorID(1)" >boton 1</button>
-            <button  onClick="traerTePorID(2)">boton 2</button>
-            <button  id="boton3">boton 3</button>
+        <div class="encabezado">
+            <p id="titulo"> <strong>TE AYUDAMOS A ENCONTRAR TU MEJOR OPCIÓN DE TÉ</strong>  <br> ¿Qué beneficios querés que tenga?  </p>
         </div>
-        <div class="cajaDos">
-            <img src="img/té_pagina.png" alt="">
+        <div class="contenedor">
+            <div id="cajaUno">
+                <p> Relajante </p>
+                <img src="img/relajante.png" alt="">
+                <div >
+                    <button id="css-button-shadow-border-sliding--green"  onClick="traerTePorID(1)" >boton 1</button> 
+                </div>
+                
+            </div>
+            
+            <div id="cajaDos">
+                <p> Dijestivo </p>
+                <img src="img/diges.png" alt="">
+                <button id="css-button-shadow-border-sliding--green" onClick="traerTePorID(2)">boton 2</button>
+            </div>
+            <div id="cajaTres">
+                <p> Energético </p>
+                <img src="img/energia.png" alt="">
+                <button id="css-button-shadow-border-sliding--green" onClick="traerTePorID(3)">boton 3</button>
+            </div>
 
+            <div class="contenedorDos">
+                
+                <p id="cajaTeElegido">  </p>
+
+            </div>
         </div>
+        
     </main>
+
 
 
     <script src="./main.js"> </script>
