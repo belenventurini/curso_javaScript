@@ -1,21 +1,22 @@
 
 //creo una clase con un constructor dandole los parametros
 class Te{ 
-    constructor(nombre, funcion, sabor, precio, color, id, img) {
+    constructor(nombre, funcion, sabor, precio, color, id, imgCard, img ) {
         this.nombre = nombre
         this.funcion = funcion
         this.sabor = sabor
         this.precio = precio
         this.color = color
         this.id = id
+        this.imgCard = imgCard
         this.img = img
         this.cantidad = 0; 
     }
 }
 //creo los objetos con sus respectivas caracteristicas
-const te1 = new Te('frutos del bosque', 'relajante', 'dulce', 550, 'colorado', 1 );
-const te2 = new Te('matcha', 'dijestivo', 'amargo', 1000, 'verde manzana', 2);
-const te3 = new Te('negro', 'energetico', 'amargo', 550, 'marron', 3);
+const te1 = new Te('Té frutos del bosque', 'relajante', 'dulce', 550, 'colorado', 1 , 'relajante.png', 'te_frutos_bosque.jpg'  );
+const te2 = new Te('Té matcha', 'dijestivo', 'amargo', 1000, 'verde manzana', 2, 'diges.png', 'matcha.jpg');
+const te3 = new Te('Té negro', 'energetico', 'amargo', 550, 'marron', 3, 'energia.png', 'te_negro.jpg' );
 
 
 //Array vacio, en donde a taves del metodo push, inserto mis objetos(té) dentro
@@ -64,15 +65,11 @@ function mostrarCards() {
         divTe.id = `div-${te.id}`;
         divTe.innerHTML = `
             <h2>${te.nombre}</h2>
-            <p><strong>Función:</strong> ${te.funcion}</p>
-            <p><strong>Sabor:</strong> ${te.sabor}</p>
-            <p><strong>Precio:</strong> $${te.precio}</p>
-            <p><strong>Color:</strong> ${te.color}</p>
-            
+            <img src="img/${te.imgCard}" alt="${te.nombre}" /> 
+            <p>${te.funcion}</p>
+
             <button class="boton-mostrar" data-id="${te.id}">Mostrar Detalles</button>
             <button class="boton-agregar" data-id="${te.id}">Agregar al Carrito</button>
-            
-            <!-- Agrega más propiedades aquí si lo deseas -->
         `;
         contenedorTe.appendChild(divTe);
     });
@@ -112,13 +109,18 @@ function mostrarCarrito() {
     if (carrito.length === 0) {
         alert('El carrito está vacío.');
     } else {
-        let mensaje = 'Productos en el carrito:\n';
+        let mensaje = '<div class="titulo-carrito">Productos en el carrito:</div>\n' ;
         carrito.forEach((te, index) => {
             mensaje += `
-            Nombre: ${te.nombre}, Cantidad: ${te.cantidad}
-            <button id="sumar-${index}" onclick="aumentarCantidad(${index})">+</button>
-            <button id="restar-${index}" onclick="disminuirCantidad(${index})">-</button>
-            <button id="eliminar-${index}" onclick="eliminarProducto(${index})">Eliminar</button>\n`;
+            <div class="info-producto">
+            <div>Nombre: ${te.nombre}</div>
+            <div>Cantidad: ${te.cantidad}</div>
+            <div class="botones-contenedor">
+                <button class="botones-carrito" id="sumar-${index}" onclick="aumentarCantidad(${index})">+</button>
+                <button class="botones-carrito" id="restar-${index}" onclick="disminuirCantidad(${index})">-</button>
+                <button class="botones-carrito boton-eliminar" id="eliminar-${index}" onclick="eliminarProducto(${index})">Eliminar</button>
+            </div>
+        </div>\n`;
         });
         Swal.fire({
             titule: 'Productos en el Carrito',
@@ -156,7 +158,7 @@ function mostrarCarrito() {
 }
 
 
-  //funciones de los botones dentro del alert del carrito de compras
+//funciones de los botones dentro del alert del carrito de compras
 function aumentarCantidad(index) {
     carrito[index].cantidad++;
     mostrarCarrito();
@@ -173,21 +175,100 @@ function eliminarProducto(index) {
 }
 
 
-//funcion para que cuando hace click en el boton muestre la info de los té 
+//funcion para que cuando hago click en el boton muestre la info de los té 
 function traerTePorID(numero) {
+    //aca creo un div para cajaTeElegido
     const cajaTeElegido = document.getElementById('caja-te-elegido');
 
+    //uso un foreach para recorrer todo mi array listaDeTes
     listaDeTes.forEach(cajaDeTe => {
+        //cajaDeTe por su id(propiedad proveniente de mis objetos)
         if (cajaDeTe.id == numero) {
             const mensaje =  `Nombre: ${cajaDeTe.nombre}<br>Funcion: ${cajaDeTe.funcion}
-            <br>Sabor: ${cajaDeTe.sabor}<br>Color: ${cajaDeTe.color}<br>Precio: ${cajaDeTe.precio}`;
-            cajaTeElegido.innerHTML = mensaje;
+            <br>Sabor: ${cajaDeTe.sabor}<br>Color: ${cajaDeTe.color}<br>Precio: ${cajaDeTe.precio}`;//guardo los datos de mis objetos en la variable mensaje
+            cajaTeElegido.innerHTML = mensaje;  //mi variable ´mensaje´ a traves de la propiedad InnerHTML me 
+                                                //permite leer los datos y asignarla al div(padre) cajaTeElegido
+
+            //aca creo un div para el bloque de texto
+            const divBloqueTexto = document.createElement('div');
+            divBloqueTexto.id = `div-BloqueTexto${cajaDeTe.id}`; 
+            divBloqueTexto.innerHTML = mensaje;
+
+            //aca estoy agregando el div hijo que cree arriba(divBloqueTexto) al padre (cajaTeElegido)
+            cajaTeElegido.innerHTML = '';
+            cajaTeElegido.appendChild(divBloqueTexto);
+
+            //creo el elemento de la imagen guardandola en la constante imagenTe
+            const imagenTe = document.createElement('img');
+            imagenTe.src = `img/${cajaDeTe.img}`;
+            imagenTe.alt = cajaDeTe.nombre; //esto es para q en caso de que no cargue la imagen, aparezca el nombre
+
+            //después creo un div para la imagen (la guardo en la variable divImagen)
+            const divImagen = document.createElement('div');
+            divImagen.className = 'bloque-imagen'; //le pongo una clase a mi div
+
+            divImagen.appendChild(imagenTe);//(el elemento creado imagenTe, se lo asigno a mi div creado: divImagen)
+            cajaTeElegido.appendChild(divImagen);//luego ese divImagen se lo asigno al div padre( cajaTeElegido )
         }
     });
 }
 
-//fetch para la API de cocteles
 fetch('https://www.thecocktaildb.com/api/json/v1/1/search.php?s=margarita')
+    .then(response => response.json())
+    .then(data => {
+        // Aquí tienes los datos obtenidos de la API (data)
+        console.log(data);
+
+        const drinksArray = data.drinks.map(drink => ({
+            idDrink: drink.idDrink,
+            strDrink: drink.strDrink,
+            strTags: drink.strTags,
+            strVideo: drink.strVideo,
+            strDrinkThumb: drink.strDrinkThumb // URL de la imagen del cóctel
+        }));
+
+        const cocktailData = {
+            drinks: drinksArray
+        };
+
+        localStorage.setItem('cocktailData', JSON.stringify(cocktailData));
+
+        // Llamar a la función para mostrar los cócteles
+        displayCocktails(drinksArray);
+    })
+    .catch(error => {
+        console.error('Error fetching data:', error);
+    });
+
+// Función para mostrar los cócteles en la página
+function displayCocktails(drinksArray) {
+    const divPadre = document.getElementById('divCocteles');
+
+    drinksArray.forEach(drink => {
+        const divHijo = document.createElement('div');
+        divHijo.classList.add('divHijoCoctel');
+
+        const nombreCocktail = document.createElement('h3');
+        nombreCocktail.textContent = drink.strDrink;
+
+        const tagsCocktail = document.createElement('p');
+        tagsCocktail.textContent = drink.strTags;
+
+        const imagenCocktail = document.createElement('img');
+        imagenCocktail.src = drink.strDrinkThumb; // URL de la imagen del cóctel
+        imagenCocktail.alt = drink.strDrink;
+
+        divHijo.appendChild(nombreCocktail);
+        divHijo.appendChild(tagsCocktail);
+        divHijo.appendChild(imagenCocktail);
+
+        divPadre.appendChild(divHijo);
+    });
+}
+
+
+//fetch para la API de cocteles
+/*fetch('https://www.thecocktaildb.com/api/json/v1/1/search.php?s=margarita')
     .then(response => response.json())
     .then(data => {
     // Aquí tienes los datos obtenidos de la API (data)
@@ -198,9 +279,11 @@ fetch('https://www.thecocktaildb.com/api/json/v1/1/search.php?s=margarita')
     });
 //aca guardo el array que me presentó la API
     const drinksArray = [
-        {idDrink: '11007', strDrink: 'Margarita', strDrinkAlternate: null, strTags: 'IBA,ContemporaryClassic', strVideo: null},
+        {idDrink: '11007', strDrink: 'Margarita', strDrinkAlternate: null, strTags: 'IBA,ContemporaryClassic', strVideo: null },
         {idDrink: '11118', strDrink: 'Blue Margarita', strDrinkAlternate: null, strTags: null, strVideo: null},
         {idDrink: '17216', strDrink: "Tommy's Margarita", strDrinkAlternate: null, strTags: 'IBA,NewEra', strVideo: null},
+        {idDrink: '16158', strDrink: 'Whitecap Margarita', strDrinkAlternate: null, strTags: null, strVideo: null}, 
+        
     ]
     const data = {
         drinks: drinksArray
@@ -227,6 +310,7 @@ fetch('https://www.thecocktaildb.com/api/json/v1/1/search.php?s=margarita')
         const tagsCocktail = document.createElement('p');
         tagsCocktail.textContent = drink.strTags;
 
+
         // Agregar los elementos al div hijo
         divHijo.appendChild(nombreCocktail);
         divHijo.appendChild(tagsCocktail);
@@ -235,7 +319,7 @@ fetch('https://www.thecocktaildb.com/api/json/v1/1/search.php?s=margarita')
         divPadre.appendChild(divHijo);
     });
     }
-
+*/
 
 
 
